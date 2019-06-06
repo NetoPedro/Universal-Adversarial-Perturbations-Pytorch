@@ -35,14 +35,14 @@ def generate(path,trainset, testset, net, delta=0.2, max_iter_uni=np.inf, xi=10,
 
     v=np.zeros([224,224,3])
     fooling_rate = 0.0
-    iter = 0
+    itr = 0
 
     # start an epoch
-    while fooling_rate < 1-delta and iter < max_iter_uni:
-        print("Starting pass number ", iter)
+    while fooling_rate < 1-delta and itr < max_iter_uni:
+        print("Starting pass number ", itr)
         k = 0
         dataiter = iter(trainset)
-        for images,labels in dataiter.next():
+        for images in dataiter.next():
             r2 = int(net(images).max(1)[1])
             torch.cuda.empty_cache()
 
@@ -60,7 +60,7 @@ def generate(path,trainset, testset, net, delta=0.2, max_iter_uni=np.inf, xi=10,
                     v[:, :, 2] += dr[0, 2, :, :]
                     v = project_perturbation(xi, p, v)
 
-        iter = iter + 1
+        itr = itr + 1
 
         with torch.no_grad():
             # Compute fooling_rate
@@ -90,6 +90,6 @@ def generate(path,trainset, testset, net, delta=0.2, max_iter_uni=np.inf, xi=10,
 
             fooling_rate = float(torch.sum(est_labels_orig != est_labels_pert))/float(i)
             print("FOOLING RATE: ", fooling_rate)
-            np.save('v'+str(iter)+'_'+str(round(fooling_rate, 4)), v)
+            np.save('v'+str(itr)+'_'+str(round(fooling_rate, 4)), v)
 
     return v
