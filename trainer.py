@@ -5,10 +5,10 @@ from torch import optim
 
 class trainer:
     def __init__(self):
-        device = torch.device('cpu')
+        self.device = torch.device('cpu')
 
         self.net = model.ConvNet()
-        self.net.to(device)
+        self.net.to(self.device)
 
         self.criterion = nn.CrossEntropyLoss()
 
@@ -23,7 +23,6 @@ class trainer:
             for i, (inputs, labels) in enumerate(trainloader, 0):
                 # Transfer to GPU
                 inputs, labels = inputs.to(self.device), labels.to(self.device)
-
                 # zero the parameter gradients
                 self.optimizer.zero_grad()
 
