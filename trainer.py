@@ -3,17 +3,19 @@ import torch
 from torch import nn
 from torch import optim
 
+device = torch.device('cpu')
+
 class trainer:
     def __init__(self):
-        self.device = torch.device('cpu')
+
 
         self.net = model.ConvNet()
-        self.net.to(self.device)
+        self.net.to(device)
 
         self.criterion = nn.CrossEntropyLoss()
 
         self.optimizer = optim.Adam(self.net.parameters(), lr=0.01)
-        self.n_epochs = 10
+        self.n_epochs = 1
 
     def train(self,trainloader,testloader):
         self.net.train()
@@ -22,7 +24,11 @@ class trainer:
             print_every = 200  # mini-batches
             for i, (inputs, labels) in enumerate(trainloader, 0):
                 # Transfer to GPU
-                inputs, labels = inputs.to(self.device), labels.to(self.device)
+                if i%2 == 0: continue
+                if i % 3 == 0: continue
+                if i % 5 == 0: continue
+                if i > 200 :break
+                inputs, labels = inputs.to(device), labels.to(device)
                 # zero the parameter gradients
                 self.optimizer.zero_grad()
 
@@ -40,20 +46,20 @@ class trainer:
 
 
             # Print accuracy after every epoch
-            accuracy = self.compute_accuracy(self.net, testloader)
+            accuracy = compute_accuracy(self.net, testloader)
             print('Accuracy of the network on the 10000 test images: %d %%' % (100 * accuracy))
 
         print('Finished Training')
 
 
 
-def compute_accuracy(self,net, testloader):
+def compute_accuracy(net, testloader):
     net.eval()
     correct = 0
     total = 0
     with torch.no_grad():
         for images, labels in testloader:
-            images, labels = images.to(self.device), labels.to(self.device)
+            images, labels = images.to(device), labels.to(device)
             outputs = net(images)
             _, predicted = torch.max(outputs.data, 1)
             total += labels.size(0)
