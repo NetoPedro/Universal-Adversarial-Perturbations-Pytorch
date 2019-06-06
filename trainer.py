@@ -46,15 +46,17 @@ class trainer:
 
         print('Finished Training')
 
-    def compute_accuracy(self,net, testloader):
-        net.eval()
-        correct = 0
-        total = 0
-        with torch.no_grad():
-            for images, labels in testloader:
-                images, labels = images.to(self.device), labels.to(self.device)
-                outputs = net(images)
-                _, predicted = torch.max(outputs.data, 1)
-                total += labels.size(0)
-                correct += (predicted == labels).sum().item()
-        return correct / total
+
+
+def compute_accuracy(self,net, testloader):
+    net.eval()
+    correct = 0
+    total = 0
+    with torch.no_grad():
+        for images, labels in testloader:
+            images, labels = images.to(self.device), labels.to(self.device)
+            outputs = net(images)
+            _, predicted = torch.max(outputs.data, 1)
+            total += labels.size(0)
+            correct += (predicted == labels).sum().item()
+    return correct / total
