@@ -36,8 +36,19 @@ The main goal is to find a perturbation where:
 
 The above formula can be translated to a perturbation v that when added to x, changes the output of K' for most of the data points x drawn from the distribution. 
 
-The generated perturbation is subject to some constraints. 
+The generated perturbation 'v' is subject to some constraints: 
 
+- ||v||p <= E 
+
+- Fooling rate >= 1 - delta
+
+The first constraint is responsible to manage and regulate how small is the vector v. The second one ensures that the fooling rate for all images is above the defined threshold. On this implementation, the fooling rate is calculated using all the images on the test set.  
+
+### Algorithm
+
+
+
+### Vulnerability to Universal Perturbations 
 
 The project is runnable from the main file. 
 
