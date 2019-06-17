@@ -60,6 +60,17 @@ After some comparisons, the authors found that the gap on the fooling rate of th
 The authors theorize about the existence of subspaces that collect normal vectors to the decision boundary. These vectors are a key element responsible for this vulnerability since the gap between other algorithms and this one can be explained by the fact that this one does not select random vectors in those subspaces, it finds the one that maximizes the fooling rate across data points.
 
 
+### Future work and considerations
+
+Although this paper explores the vulnerability present on neural networks related to adversarial examples, pushing it even further with the help of universal perturbations that do not need to be crafted specifically for each example, it is not able to present a decent solution to this problem. 
+
+Even after trying to use the generated perturbations to fine-tune the model with adversarial training, it did not yield any impressive or significative result. 
+
+As future work, it is important to better understand the geometric correlation between data points and the connection  with the fooling rate, as well as, coming up with alternative training techniques to overcome those vulnerabilities and reduce their impact at least.  One possibility is to use this geometric correlation on the training process. 
+
+
+Finally, the paper has shown that models are still exposed to high risks and can possibly be fooled by malicious individuals.  
+
 ### Running the project
 
 The project is runnable from the main file. 
