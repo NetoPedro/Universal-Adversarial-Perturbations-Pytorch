@@ -2,7 +2,7 @@
 
 Implementation of (https://arxiv.org/abs/1610.08401) for the CS-E4070 - Special Course in Machine Learning and Data Science: Advanced Topics in Deep Learning course at Aalto University, Finland. 
 
-
+The dataset used was the Fashion Mnist for simplicity and to be trainable on the cpu. 
 
 ## Paper interpretation 
 
@@ -46,7 +46,7 @@ The first constraint is responsible to manage and regulate how small is the vect
 
 ### Algorithm
 
-
+The algorithm is simple and The algorithm is simple and intuitive. It has a main loop that will keep running until the fooling rate constraint is satisfied.  Inside this loop, there is an iteration across all data points. If the network is fooled by the current perturbation on the current data point there is no need to do anything more with it, and we move to the next data point. On the other hand, if the neural network is not fooled on that data point it is necessary to update the perturbation. To update the perturbation, and iteration of the deep fool algorithm (https://arxiv.org/pdf/1511.04599.pdf) is run as suggested on the paper, and the calculated perturbation is added to the current one, with the result being projected and resulting on the new perturbation.  
 
 ### Vulnerability to Universal Perturbations 
 
