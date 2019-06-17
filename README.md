@@ -21,5 +21,16 @@ The paper has shown some impressive results:
 - Finally, it is shown that there is a geometric correlation behind these examples that make neural networks highly vulnerable if anyone with malicious intent tries to affect the system. 
 
 
+Other interesting topics on this paper: 
+
+- This implementation doesn't try to find a data point specific perturbation as previous algorithms do.  Instead, it tries to find a perturbation that generalizes well to most data points. 
+
+- The perturbations are based on some data distribution and not directly intended to be generalized across different models.
+
+
+
+
 The project is runnable from the main file. 
+
+
 
