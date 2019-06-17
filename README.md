@@ -46,7 +46,12 @@ The first constraint is responsible to manage and regulate how small is the vect
 
 ### Algorithm
 
-The algorithm is simple and The algorithm is simple and intuitive. It has a main loop that will keep running until the fooling rate constraint is satisfied.  Inside this loop, there is an iteration across all data points. If the network is fooled by the current perturbation on the current data point there is no need to do anything more with it, and we move to the next data point. On the other hand, if the neural network is not fooled on that data point it is necessary to update the perturbation. To update the perturbation, and iteration of the deep fool algorithm (https://arxiv.org/pdf/1511.04599.pdf) is run as suggested on the paper, and the calculated perturbation is added to the current one, with the result being projected and resulting on the new perturbation.  
+The algorithm is simple and intuitive. It has a main loop that will keep running until the fooling rate constraint is satisfied.  Inside this loop, there is an iteration across all data points. If the network is fooled by the current perturbation on the current data point there is no need to do anything more with it, and we move to the next data point. On the other hand, if the neural network is not fooled on that data point it is necessary to update the perturbation. To update the perturbation, and iteration of the deep fool algorithm (https://arxiv.org/pdf/1511.04599.pdf) is run as suggested on the paper, and the calculated perturbation is added to the current one, with the result being projected and resulting on the new perturbation.  
+
+The calculus to find the fooling rate is simply the division of the count of fooled images by the total number of images considered. 
+
+Due to the nature of this algorithm, it is not guaranteed that the found perturbation is the best perturbation, or even that it is unique. The constraints are quite broad and allow a significant variance on the perturbations find on multiple runs of the algorithm. Therefore, this is not an algorithm to find the smallest universal perturbation. It is mentioned in the paper that the algorithm can be manipulated and changed to find multiple adversarial universal perturbations that satisfy all the constraints.
+
 
 ### Vulnerability to Universal Perturbations 
 
