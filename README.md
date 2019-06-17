@@ -28,6 +28,15 @@ Other interesting topics on this paper:
 - The perturbations are based on some data distribution and not directly intended to be generalized across different models.
 
 
+### Universal Perturbations
+
+The main goal is to find a perturbation where: 
+
+- K'(x+v)  != k'(x) for most x ~ distribution
+
+The above formula can be translated to a perturbation v that when added to x, changes the output of K' for most of the data points x drawn from the distribution. 
+
+The generated perturbation is subject to some constraints. 
 
 
 The project is runnable from the main file. 
