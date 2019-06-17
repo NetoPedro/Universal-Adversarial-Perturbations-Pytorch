@@ -55,6 +55,11 @@ Due to the nature of this algorithm, it is not guaranteed that the found perturb
 
 ### Vulnerability to Universal Perturbations 
 
+After some comparisons, the authors found that the gap on the fooling rate of the universal perturbations and random perturbations is motivated by the exploration of geometric properties of the data points. They even say that if the data used was completely uncorrelated, results from the random and universal perturbations would be comparable. 
+
+The authors theorize about the existence of subspaces that collect normal vectors to the decision boundary. These vectors are a key element responsible for this vulnerability since the gap between other algorithms and this one can be explained by the fact that this one does not select random vectors in those subspaces, it finds the one that maximizes the fooling rate across data points.
+
+
 The project is runnable from the main file. 
 
 
