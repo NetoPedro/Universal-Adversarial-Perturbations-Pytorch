@@ -1,5 +1,6 @@
 
 ## This file source is https://github.com/BXuan694/Universal-Adversarial-Perturbation/blob/master/deepfool.py
+## This file is not the scope of the original paper of this project
 
 import numpy as np
 from torch.autograd import Variable
@@ -11,13 +12,14 @@ from torch.autograd.gradcheck import zero_gradients
 def deepfool(image, net, num_classes, overshoot, max_iter):
 
     """
-       :param image: Image of size HxWx3
+       :param image:
        :param net: network (input: images, output: values of activation **BEFORE** softmax).
        :param num_classes: num_classes (limits the number of classes to test against, by default = 10)
        :param overshoot: used as a termination criterion to prevent vanishing updates (default = 0.02).
        :param max_iter: maximum number of iterations for deepfool (default = 50)
        :return: minimal perturbation that fools the classifier, number of iterations that it required, new estimated_label and perturbed image
     """
+
     is_cuda = torch.cuda.is_available()
     if is_cuda:
         image = image.cuda()
@@ -74,7 +76,9 @@ def deepfool(image, net, num_classes, overshoot, max_iter):
             pert_image = image + (1+overshoot)*torch.from_numpy(r_tot)
 
         x = Variable(pert_image, requires_grad=True)
-        fs = net.forward(x)
+       # print(image.shape)
+       # print(x.view(1,1,image.shape[0],-1).shape)
+        fs = net.forward(x.view(1,1,image.shape[1],-1))
         k_i = np.argmax(fs.data.cpu().numpy().flatten())
 
         loop_i += 1
