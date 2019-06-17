@@ -60,6 +60,8 @@ After some comparisons, the authors found that the gap on the fooling rate of th
 The authors theorize about the existence of subspaces that collect normal vectors to the decision boundary. These vectors are a key element responsible for this vulnerability since the gap between other algorithms and this one can be explained by the fact that this one does not select random vectors in those subspaces, it finds the one that maximizes the fooling rate across data points.
 
 
+### Running the project
+
 The project is runnable from the main file. 
 
 
