@@ -75,5 +75,10 @@ Finally, the paper has shown that models are still exposed to high risks and can
 
 The project is runnable from the main file. 
 
+## Implementation Results
 
+### Fooling rate 
 
+Evolution of the fooling rate per iteration of the universal adversarial perturbation algorithm , using only 100 images from the train data to generate universal perturbations.  
+
+   ![Fooling rate per iteration](https://raw.githubusercontent.com/NetoPedro/Universal-Adversarial-Perturbations-Pytorch/master/fool_rate.png)
