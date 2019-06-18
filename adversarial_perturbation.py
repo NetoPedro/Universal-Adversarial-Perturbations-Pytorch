@@ -1,6 +1,7 @@
 import numpy as np
 import deepfool
 from PIL import Image
+import trainer
 import torch
 from torchvision import transforms
 
@@ -13,7 +14,7 @@ def project_perturbation(data_point,p,perturbation  ):
     return perturbation
 
 
-def generate(trainset, testset, net, delta=0.15, max_iter_uni=np.inf, xi=10, p=np.inf, num_classes=10, overshoot=0.2, max_iter_df=20):
+def generate(accuracy ,trainset, testset, net, delta=0.2, max_iter_uni=np.inf, xi=10, p=np.inf, num_classes=10, overshoot=0.2, max_iter_df=20):
     '''
     :param trainset: Pytorch Dataloader with train data
     :param testset: Pytorch Dataloader with test data
@@ -45,7 +46,7 @@ def generate(trainset, testset, net, delta=0.15, max_iter_uni=np.inf, xi=10, p=n
 
     # Setting the number of images to 300  (A much lower number than the total number of instances on the training set)
     # To verify the generalization power of the approach
-    num_img_trn = 300
+    num_img_trn = 100
     index_order = np.arange(num_img_trn)
 
     # Initializing the perturbation to 0s
@@ -65,7 +66,10 @@ def generate(trainset, testset, net, delta=0.15, max_iter_uni=np.inf, xi=10, p=n
         transforms.Resize(256),
         transforms.CenterCrop(28),
     ])
-
+    fooling_rates=[0]
+    accuracies = []
+    accuracies.append(accuracy)
+    total_iterations = [0]
     # Begin of the main loop on Universal Adversarial Perturbations algorithm
     while fooling_rate < 1-delta and iter < max_iter_uni:
         np.random.shuffle(index_order)
@@ -124,20 +128,24 @@ def generate(trainset, testset, net, delta=0.15, max_iter_uni=np.inf, xi=10, p=n
                 _, predicted = outputs.max(1)
                 labels_original_images = torch.cat((labels_original_images, predicted.cpu()))
             torch.cuda.empty_cache()
-
+            correct = 0
             # Finding labels for perturbed images
-            for batch_index, (inputs, _) in enumerate(testset):
+            for batch_index, (inputs, labels) in enumerate(testset):
                 inputs = inputs.to(device)
                 inputs += transformer(v).float()
                 outputs = net(inputs)
                 _, predicted = outputs.max(1)
                 labels_pertubed_images = torch.cat((labels_pertubed_images, predicted.cpu()))
+                correct += (predicted == labels).sum().item()
             torch.cuda.empty_cache()
+
 
             # Calculating the fooling rate by dividing the number of fooled images by the total number of images
             fooling_rate = float(torch.sum(labels_original_images != labels_pertubed_images))/float(i)
 
             print()
             print("FOOLING RATE: ", fooling_rate)
-
-    return v
+            fooling_rates.append(fooling_rate)
+            accuracies.append(correct / i)
+            total_iterations.append(iter)
+    return v,fooling_rates,accuracies,total_iterations

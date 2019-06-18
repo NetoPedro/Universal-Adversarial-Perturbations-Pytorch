@@ -15,9 +15,10 @@ class trainer:
         self.criterion = nn.CrossEntropyLoss()
 
         self.optimizer = optim.Adam(self.net.parameters(), lr=0.01)
-        self.n_epochs = 5
+        self.n_epochs = 4
 
     def train(self,trainloader,testloader):
+        accuracy = 0
         self.net.train()
         for epoch in range(self.n_epochs):
             running_loss = 0.0
@@ -43,10 +44,11 @@ class trainer:
 
 
             # Print accuracy after every epoch
-           # accuracy = compute_accuracy(self.net, testloader)
-            #print('Accuracy of the network on the 10000 test images: %d %%' % (100 * accuracy))
+            accuracy = compute_accuracy(self.net, testloader)
+            print('Accuracy of the network on the 10000 test images: %d %%' % (100 * accuracy))
 
         print('Finished Training')
+        return accuracy
 
 
 
