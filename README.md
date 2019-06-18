@@ -82,3 +82,10 @@ The project is runnable from the main file.
 Evolution of the fooling rate per iteration of the universal adversarial perturbation algorithm , using only 100 images from the train data to generate universal perturbations.  
 
    ![Fooling rate per iteration](https://raw.githubusercontent.com/NetoPedro/Universal-Adversarial-Perturbations-Pytorch/master/fool_rate.png)
+   
+### Accuracy 
+
+Evolution of the accuracy of the network on the test set when added the final perturbation of some iteration.
+ 
+ ![Accuracy per iteration](https://raw.githubusercontent.com/NetoPedro/Universal-Adversarial-Perturbations-Pytorch/master/accuracy.png)
+
