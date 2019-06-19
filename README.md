@@ -33,7 +33,7 @@ Other interesting topics on this paper:
 The main goal is to find a perturbation where: 
 
 - K'(x+v)  != k'(x) for most x ~ distribution
-- [equation1](https://latex.codecogs.com/gif.latex?%5Cwidehat%7Bk%7D%28x&plus;v%29%20%5Cneq%20%5Cwidehat%7Bk%7D%28x%29)
+- ![equation1](https://latex.codecogs.com/gif.latex?%5Cwidehat%7Bk%7D%28x&plus;v%29%20%5Cneq%20%5Cwidehat%7Bk%7D%28x%29)
 
 The above formula can be translated to a perturbation v that when added to x, changes the output of K' for most of the data points x drawn from the distribution. 
 
