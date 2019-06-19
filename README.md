@@ -33,6 +33,7 @@ Other interesting topics on this paper:
 The main goal is to find a perturbation where: 
 
 - K'(x+v)  != k'(x) for most x ~ distribution
+- $ \widehat{k}(x+v)   \neq   \widehat{k}(x)  for most x  \sim D $
 
 The above formula can be translated to a perturbation v that when added to x, changes the output of K' for most of the data points x drawn from the distribution. 
 
