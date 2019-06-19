@@ -1,6 +1,6 @@
 # Universal-Adversarial-Perturbations-Pytorch
 
-Implementation of (https://arxiv.org/abs/1610.08401) for the CS-E4070 - Special Course in Machine Learning and Data Science: Advanced Topics in Deep Learning course at Aalto University, Finland. 
+Implementation of [Universal Adversarial Perturbations paper](https://arxiv.org/abs/1610.08401) for the CS-E4070 - Special Course in Machine Learning and Data Science: Advanced Topics in Deep Learning course at Aalto University, Finland. 
 
 The dataset used was the Fashion Mnist for simplicity and to be trainable on the cpu. 
 
@@ -32,7 +32,6 @@ Other interesting topics on this paper:
 
 The main goal is to find a perturbation where: 
 
-- K'(x+v)  != k'(x) for most x ~ distribution
 - ![equation1](https://latex.codecogs.com/gif.latex?%5Cwidehat%7Bk%7D%28x&plus;v%29%20%5Cneq%20%5Cwidehat%7Bk%7D%28x%29) for most ![equation2](https://latex.codecogs.com/gif.latex?x%20%5Csim%20D)
 
 The above formula can be translated to a perturbation v that when added to x, changes the output of K' for most of the data points x drawn from the distribution. 
@@ -47,7 +46,7 @@ The first constraint is responsible to manage and regulate how small is the vect
 
 ### Algorithm
 
-The algorithm is simple and intuitive. It has a main loop that will keep running until the fooling rate constraint is satisfied.  Inside this loop, there is an iteration across all data points. If the network is fooled by the current perturbation on the current data point there is no need to do anything more with it, and we move to the next data point. On the other hand, if the neural network is not fooled on that data point it is necessary to update the perturbation. To update the perturbation, and iteration of the deep fool algorithm (https://arxiv.org/pdf/1511.04599.pdf) is run as suggested on the paper, and the calculated perturbation is added to the current one, with the result being projected and resulting on the new perturbation.  
+The algorithm is simple and intuitive. It has a main loop that will keep running until the fooling rate constraint is satisfied.  Inside this loop, there is an iteration across all data points. If the network is fooled by the current perturbation on the current data point there is no need to do anything more with it, and we move to the next data point. On the other hand, if the neural network is not fooled on that data point it is necessary to update the perturbation. To update the perturbation, and iteration of the [DeepFool Algorithm](https://arxiv.org/pdf/1511.04599.pdf) is run as suggested on the paper, and the calculated perturbation is added to the current one, with the result being projected and resulting on the new perturbation.  
 
 The calculus to find the fooling rate is simply the division of the count of fooled images by the total number of images considered. 
 
